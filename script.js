@@ -1,6 +1,6 @@
 var timer = 5;
 var score  = 0;
-
+var hitRN = 0;
 
 
 function increaseScore(){
@@ -24,18 +24,24 @@ function runTimer(){
         timer--
         document.getElementById('timerValue').textContent = timer
         }else{
+            document.getElementById('pbtm').innerHTML = "<h1>Time Finish</h1>"
             clearInterval(timerInt)
         }
     },1000)
 }
 
 function getNewHit(){
-    var rn = Math.floor(Math.random()*10)
-    document.getElementById('hitValue').textContent = rn
+    hitRN = Math.floor(Math.random()*10)
+    document.getElementById('hitValue').textContent = hitRN
 }
 
 document.getElementById('pbtm').addEventListener('click', function(details){
-    console.log(details.target.textContent) //-- 'target' esse pta chlega kis bubble p e click kiye hai--
+    var clickedNumber = (Number(details.target.textContent)) //-- 'target' esse pta chlega kis bubble p e click kiye hai--
+    if(clickedNumber==hitRN){
+        increaseScore();
+        makeBubble();
+        getNewHit();
+    }
 })
 
 runTimer();
